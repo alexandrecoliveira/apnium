@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APNIUM", "APNIUM\APNIUM.csproj", "{3FB32A49-FE54-42EE-8741-3E13D26B63F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FB32A49-FE54-42EE-8741-3E13D26B63F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FB32A49-FE54-42EE-8741-3E13D26B63F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FB32A49-FE54-42EE-8741-3E13D26B63F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FB32A49-FE54-42EE-8741-3E13D26B63F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB86C872-101B-4DF0-ADBC-033DCB00B760}
+	EndGlobalSection
+EndGlobal
