@@ -80,9 +80,9 @@
             // 
             // txtResult
             // 
-            this.txtResult.Location = new System.Drawing.Point(291, 14);
+            this.txtResult.Location = new System.Drawing.Point(291, 9);
             this.txtResult.Name = "txtResult";
-            this.txtResult.Size = new System.Drawing.Size(533, 450);
+            this.txtResult.Size = new System.Drawing.Size(533, 455);
             this.txtResult.TabIndex = 5;
             this.txtResult.Text = "";
             // 
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 477);
+            this.ClientSize = new System.Drawing.Size(832, 485);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.btnScrap);
             this.Controls.Add(this.label2);

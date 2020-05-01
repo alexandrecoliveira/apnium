@@ -2,13 +2,6 @@
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -32,7 +25,9 @@ namespace APNIUM
         //Inicia o browser e navega para a página desejada
         private void startWeb(String url)
         {
-            driver = new ChromeDriver();
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArgument("headless");
+            driver = new ChromeDriver();            
             driver.Navigate().GoToUrl(url);
         }
 
@@ -54,9 +49,12 @@ namespace APNIUM
             var vagas = driver.FindElements(By.XPath("/html/body/div[4]/div[2]/div/section/div[2]/div"));
 
             foreach (var vaga in vagas)
-            {
-                //Console.WriteLine("\tVaga: " + vaga.Text + "\n\n");
-                txtResult.AppendText("\t\tVaga: " + vaga.Text + "\n\n");                    
+            {                                
+                var cidade = vaga.FindElement(By.ClassName("info-data"));
+
+                if( cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("São Paulo ") ||
+                    cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("Barueri "))
+                    txtResult.AppendText("\t\tVaga: " + vaga.Text + "\n\n");                                                   
             }
         }
 
