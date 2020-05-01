@@ -25,8 +25,9 @@ namespace APNIUM
         //Inicia o browser e navega para a página desejada
         private void startWeb(String url)
         {
-            var chromeOptions = new ChromeOptions();
-            chromeOptions.AddArgument("headless");
+            //var chromeOptions = new ChromeOptions();
+            //chromeOptions.AddArgument("headless");
+            //driver = new ChromeDriver(chromeOptions);
             driver = new ChromeDriver();            
             driver.Navigate().GoToUrl(url);
         }
@@ -55,6 +56,7 @@ namespace APNIUM
                 if( cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("São Paulo ") ||
                     cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("Barueri "))
                     txtResult.AppendText("\t\tVaga: " + vaga.Text + "\n\n");                                                   
+                    //txtResult.AppendText(cidade.Text.Substring(0, cidade.Text.IndexOf("-")) + "\n\n");                                                   
             }
         }
 
@@ -91,7 +93,24 @@ namespace APNIUM
             var dtFim = frmDataFim.SelectionRange.Start.ToString("dd/MM/yy");
 
             addDateFilter(dtInicio, dtFim);
-            recoverJobs();
+            
+            var nPaginas = driver.FindElement(By.ClassName("n-paginas")); //Encontra o valor do nro de páginas
+            int nroPaginas = int.Parse(nPaginas.Text.Substring(nPaginas.Text.Length - 3));
+            txtResult.AppendText("Número de Páginas: " + nroPaginas + "\n");
+
+            
+            int i = 1;
+            while (i < nroPaginas)
+            {
+                var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));                
+
+                recoverJobs();
+                //Thread.Sleep(5000);
+                botaoProxPagina.Click();
+                i++;
+                //Thread.Sleep(10000);
+            }
+                        
         }
     }
 }
