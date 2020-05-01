@@ -2,7 +2,6 @@ C:\Users\alexa\source\repos\APNIUM\APNIUM\bin\Debug\APNIUM.exe.config
 C:\Users\alexa\source\repos\APNIUM\APNIUM\bin\Debug\APNIUM.exe
 C:\Users\alexa\source\repos\APNIUM\APNIUM\bin\Debug\APNIUM.pdb
 C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.csprojAssemblyReference.cache
-C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.Form1.resources
 C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.Properties.Resources.resources
 C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.csproj.GenerateResource.cache
 C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.exe
@@ -13,3 +12,4 @@ C:\Users\alexa\source\repos\APNIUM\APNIUM\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\alexa\source\repos\APNIUM\APNIUM\bin\Debug\HtmlAgilityPack.xml
 C:\Users\alexa\source\repos\APNIUM\APNIUM\bin\Debug\WebDriver.xml
 C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.csproj.CopyComplete
+C:\Users\alexa\source\repos\APNIUM\APNIUM\obj\Debug\APNIUM.frmPrincipal.resources

@@ -14,12 +14,12 @@ using System.Threading;
 
 namespace APNIUM
 {
-    public partial class Form1 : Form
+    public partial class frmPrincipal : Form
     {
 
         private static IWebDriver driver;
 
-        public Form1()
+        public frmPrincipal()
         {
             InitializeComponent();            
         }
@@ -51,12 +51,12 @@ namespace APNIUM
         private void recoverJobs()
         {
             //Thread.Sleep(10);
-
             var vagas = driver.FindElements(By.XPath("/html/body/div[4]/div[2]/div/section/div[2]/div"));
 
             foreach (var vaga in vagas)
             {
-                Console.WriteLine("\tVaga: " + vaga.Text + "\n\n");
+                //Console.WriteLine("\tVaga: " + vaga.Text + "\n\n");
+                txtResult.AppendText("\t\tVaga: " + vaga.Text + "\n\n");                    
             }
         }
 
@@ -92,10 +92,8 @@ namespace APNIUM
             var dtInicio = frmDataInicio.SelectionRange.Start.ToString("dd/MM/yy");
             var dtFim = frmDataFim.SelectionRange.Start.ToString("dd/MM/yy");
 
-            lblDtInicioTeste.Text = dtInicio;
-            lblDtFimTeste.Text = dtFim;
-
             addDateFilter(dtInicio, dtFim);
+            recoverJobs();
         }
     }
 }
