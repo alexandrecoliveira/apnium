@@ -21,8 +21,7 @@ namespace APNIUM
 
         public Form1()
         {
-            InitializeComponent();
-            startWeb("https://www.apinfo.com/apinfo/inc/list4.cfm");
+            InitializeComponent();            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,14 +37,14 @@ namespace APNIUM
         }
 
         //Adiciona o filtro de data
-        private void addDateFilter()
+        private void addDateFilter(String dataI, String dataF)
         {
             var dataInicio = driver.FindElement(By.Name("ddmmaa1"));
             var dataFim = driver.FindElement(By.Name("ddmmaa2"));
             var filtrar = driver.FindElement(By.XPath("/html/body/div[4]/div[1]/div/form/div[1]/input"));
 
-            dataInicio.SendKeys("29/04/2020");
-            dataFim.SendKeys("29/04/2020");
+            dataInicio.SendKeys(dataI);
+            dataFim.SendKeys(dataF);
             filtrar.Click();            
         }
 
@@ -81,6 +80,22 @@ namespace APNIUM
                 i++;
                 Thread.Sleep(10000);
             }
+        }                
+
+        private void btnScrap_Click(object sender, EventArgs e)
+        {
+            startWeb("https://www.apinfo.com/apinfo/inc/list4.cfm");
+                        
+            frmDataInicio.MaxSelectionCount = 1;
+            frmDataFim.MaxSelectionCount = 1;
+            
+            var dtInicio = frmDataInicio.SelectionRange.Start.ToString("dd/MM/yy");
+            var dtFim = frmDataFim.SelectionRange.Start.ToString("dd/MM/yy");
+
+            lblDtInicioTeste.Text = dtInicio;
+            lblDtFimTeste.Text = dtFim;
+
+            addDateFilter(dtInicio, dtFim);
         }
     }
 }
