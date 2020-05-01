@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace APNIUM
 {
@@ -57,6 +58,28 @@ namespace APNIUM
             foreach (var vaga in vagas)
             {
                 Console.WriteLine("\tVaga: " + vaga.Text + "\n\n");
+            }
+        }
+
+        private void nextPage()
+        {
+            var nPaginas = driver.FindElement(By.ClassName("n-paginas"));
+            int nroPaginas = int.Parse(nPaginas.Text.Substring(nPaginas.Text.Length - 3));
+            Console.WriteLine(nroPaginas + "\t\t" + (nroPaginas - 1));
+
+            //var campoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[4]/input"));
+            //var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));
+
+            int i = 1;
+            while (i < nroPaginas)
+            {
+                var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));
+                //var campoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[4]/input"));
+                //campoProxPagina.Clear();
+                //campoProxPagina.SendKeys(i.ToString());
+                botaoProxPagina.Click();
+                i++;
+                Thread.Sleep(10000);
             }
         }
     }
