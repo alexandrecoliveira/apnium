@@ -14,12 +14,12 @@ namespace APNIUM
 
         public frmPrincipal()
         {
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         //Inicia o browser e navega para a página desejada
@@ -28,7 +28,7 @@ namespace APNIUM
             //var chromeOptions = new ChromeOptions();
             //chromeOptions.AddArgument("headless");
             //driver = new ChromeDriver(chromeOptions);
-            driver = new ChromeDriver();            
+            driver = new ChromeDriver();
             driver.Navigate().GoToUrl(url);
         }
 
@@ -41,7 +41,7 @@ namespace APNIUM
 
             dataInicio.SendKeys(dataI);
             dataFim.SendKeys(dataF);
-            filtrar.Click();            
+            filtrar.Click();
         }
 
         private void recoverJobs()
@@ -50,67 +50,52 @@ namespace APNIUM
             var vagas = driver.FindElements(By.XPath("/html/body/div[4]/div[2]/div/section/div[2]/div"));
 
             foreach (var vaga in vagas)
-            {                                
+            {
                 var cidade = vaga.FindElement(By.ClassName("info-data"));
 
-                if( cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("São Paulo ") ||
+                if (cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("São Paulo ") ||
                     cidade.Text.Substring(0, cidade.Text.IndexOf("-")).ToString().Equals("Barueri "))
-                    txtResult.AppendText("\t\tVaga: " + vaga.Text + "\n\n");                                                   
-                    //txtResult.AppendText(cidade.Text.Substring(0, cidade.Text.IndexOf("-")) + "\n\n");                                                   
+                    txtResult.AppendText("\t\tVaga: " + vaga.Text + "\n\n");
+                //txtResult.AppendText(cidade.Text.Substring(0, cidade.Text.IndexOf("-")) + "\n\n");                                                   
             }
         }
-
-        private void nextPage()
-        {
-            var nPaginas = driver.FindElement(By.ClassName("n-paginas"));
-            int nroPaginas = int.Parse(nPaginas.Text.Substring(nPaginas.Text.Length - 3));
-            Console.WriteLine(nroPaginas + "\t\t" + (nroPaginas - 1));
-
-            //var campoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[4]/input"));
-            //var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));
-
-            int i = 1;
-            while (i < nroPaginas)
-            {
-                var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));
-                //var campoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[4]/input"));
-                //campoProxPagina.Clear();
-                //campoProxPagina.SendKeys(i.ToString());
-                botaoProxPagina.Click();
-                i++;
-                Thread.Sleep(10000);
-            }
-        }                
 
         private void btnScrap_Click(object sender, EventArgs e)
         {
             startWeb("https://www.apinfo.com/apinfo/inc/list4.cfm");
-                        
+
             frmDataInicio.MaxSelectionCount = 1;
             frmDataFim.MaxSelectionCount = 1;
-            
+
             var dtInicio = frmDataInicio.SelectionRange.Start.ToString("dd/MM/yy");
             var dtFim = frmDataFim.SelectionRange.Start.ToString("dd/MM/yy");
 
             addDateFilter(dtInicio, dtFim);
             
-            var nPaginas = driver.FindElement(By.ClassName("n-paginas")); //Encontra o valor do nro de páginas
-            int nroPaginas = int.Parse(nPaginas.Text.Substring(nPaginas.Text.Length - 3));
-            txtResult.AppendText("Número de Páginas: " + nroPaginas + "\n");
-
-            
-            int i = 1;
-            while (i < nroPaginas)
+            try
             {
-                var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));                
+                var nPaginas = driver.FindElement(By.ClassName("n-paginas")); //Encontra o valor do nro de páginas no html
+                int nroPaginas = int.Parse(nPaginas.Text.Substring(nPaginas.Text.IndexOf("de ") + 3));
 
-                recoverJobs();
-                //Thread.Sleep(5000);
-                botaoProxPagina.Click();
-                i++;
-                //Thread.Sleep(10000);
+                int i = 1;  //Representa a primeira página
+                while (i < nroPaginas)
+                {
+                    var botaoProxPagina = driver.FindElement(By.XPath("/html/body/div[4]/div[2]/div/section/form/div/div[2]/table/tbody/tr/td[5]/input"));
+
+                    recoverJobs();
+                    //Thread.Sleep(5000);
+                    botaoProxPagina.Click();
+                    i++;
+                }
+
             }
-                        
+            catch (Exception ex)
+            {
+                txtResult.AppendText("*** ERRO: A BUSCA NÃO RETORNOU VALORES *** \n\n" + ex);
+                driver.Close();
+            }
+
         }
+
     }
 }
