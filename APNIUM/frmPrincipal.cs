@@ -28,8 +28,15 @@ namespace APNIUM
             //var chromeOptions = new ChromeOptions();
             //chromeOptions.AddArgument("headless");
             //driver = new ChromeDriver(chromeOptions);
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(url);
+            try 
+	        {	        
+		        driver = new ChromeDriver();
+                driver.Navigate().GoToUrl(url);
+	        }
+	        catch (Exception e)
+	        {
+                Console.WriteLine(e);                
+	        }                                                               
         }
 
         //Adiciona o filtro de data
