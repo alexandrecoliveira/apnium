@@ -35,7 +35,8 @@ namespace APNIUM
 	        }
 	        catch (Exception e)
 	        {
-                Console.WriteLine(e);                
+                Console.WriteLine(e);   
+                throw e;
 	        }                                                               
         }
 
@@ -94,6 +95,7 @@ namespace APNIUM
                     botaoProxPagina.Click();
                     i++;
                 }
+                driver.Close();
 
             }
             catch (Exception ex)
